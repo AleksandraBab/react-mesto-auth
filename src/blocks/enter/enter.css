@@ -7,3 +7,9 @@
   flex: 1;
   margin-bottom: 80px;
 }
+
+@media screen and (max-width:600px){
+  .enter {
+    width: calc(100% - 60px);
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function InfoTooltip (props) {
-  const {isOpen, onClose, stopProp, isRegistered} = props;
+  const {isOpen, onClose, stopProp, state} = props;
 
   return  (
     <div className={`popup ${isOpen && 'popup_opened'}`}
@@ -17,8 +17,8 @@ export default function InfoTooltip (props) {
         onClick={onClose}
       >
       </button>
-      <div className={`popup__img ${isRegistered ? 'popup__img_type_success' : 'popup__img_type_bad'}`}></div>
-      <h2 className="popup__heading popup__heading_type_reg">{isRegistered ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'}</h2>
+      <div className={`popup__img ${state ? 'popup__img_type_success' : 'popup__img_type_bad'}`}></div>
+      <h2 className="popup__heading popup__heading_type_reg">{state ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'}</h2>
     </div>
   </div>
 

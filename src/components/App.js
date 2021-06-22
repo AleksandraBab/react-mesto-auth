@@ -29,7 +29,7 @@ function App() {
   const [cards, setCards] = React.useState([])
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false)
-  const [isRegistered, setIsRegistered] = React.useState(false)
+  const [infoTooltipState, setInfoTooltipState] = React.useState(false)
   const [logedIn, setLogedIn] = React.useState(false)
   const [userEmail, setUserEmail] = React.useState('')
 
@@ -53,7 +53,7 @@ function App() {
     setIsAddPlacePopupOpen(true)
   }
 
-  const handleRegistered = () => {
+  const openInfo = () => {
     setIsInfoTooltipOpen(true)
   }
 
@@ -100,8 +100,8 @@ function App() {
 
   /* Авторизация и регистрация */
 
-  const checkRegistration = (value) => {
-    setIsRegistered(value)
+  const setInfoTooltipMessage = (value) => {
+    setInfoTooltipState(value)
   }
 
   const isLogIn = (value) => {
@@ -117,10 +117,9 @@ function App() {
           if (res.data.email !== userEmail) {
             setUserEmail(res.data.email);
           }
-          if (res){
+            console.log(res)
             setLogedIn(true)
             history.push('/');
-          }
         })
         .catch((err) => {
           console.log(err);
@@ -261,6 +260,8 @@ function App() {
             buttonText='Войти'
             name='login'
             logIn={isLogIn}
+            openInfo={openInfo}
+            setInfoTooltipMessage={setInfoTooltipMessage}
           />
           </Route>
           <Route path="/sign-up">
@@ -268,8 +269,8 @@ function App() {
               title='Регистрация'
               buttonText='Зарегистрироваться'
               name='register'
-              onRegister={handleRegistered}
-              checkRegistration={checkRegistration}
+              openInfo={openInfo}
+              setInfoTooltipMessage={setInfoTooltipMessage}
             />
          </Route>
 
@@ -334,7 +335,7 @@ function App() {
         isOpen={isInfoTooltipOpen}
         onClose={closeAllPopups}
         stopProp={stopProp}
-        isRegistered={isRegistered}
+        state={infoTooltipState}
       />
     </CurrentUserContext.Provider>
   )

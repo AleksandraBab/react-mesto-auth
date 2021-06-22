@@ -8,3 +8,9 @@
   display: flex;
 }
 
+@media screen and (max-width:600px){
+  .header__text {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

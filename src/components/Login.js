@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import * as auth from './auth'
 
 function Login (props) {
-  const {title, name, buttonText, logIn} = props;
+  const {title, name, buttonText, logIn, openInfo, setInfoTooltipMessage} = props;
 
   const history = useHistory();
 
@@ -39,7 +39,11 @@ function Login (props) {
       logIn(true);
       history.push('/');
     })
-    .catch(err => console.log(err));
+    .catch( (err) => {
+      setInfoTooltipMessage(false)
+      openInfo()
+      console.log(err)
+    });
 
   }
 

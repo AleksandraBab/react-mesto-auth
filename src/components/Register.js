@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import * as auth from './auth'
 
 function Register (props) {
-  const {title, name, buttonText, onRegister, checkRegistration} = props;
+  const {title, name, buttonText, openInfo, setInfoTooltipMessage} = props;
 
   const history = useHistory();
 
@@ -33,14 +33,14 @@ function Register (props) {
           password: '',
           email: '',
         })
-        checkRegistration(true)
-        onRegister()
+        setInfoTooltipMessage(true)
+        openInfo()
         history.push('/sign-in')
       })
       .catch((err) => {
         console.log(err)
-        checkRegistration(false)
-        onRegister()
+        setInfoTooltipMessage(false)
+        openInfo()
       })
   }
 
