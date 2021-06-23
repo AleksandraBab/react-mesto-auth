@@ -25,8 +25,8 @@ export default function EditProfilePopup (props) {
   }, [currentUser, isOpen])
 
   React.useEffect(() => {
-    const isUserNameValid = formValues.userName.length > 1;
-    const isCaptionValid = formValues.caption.length > 1;
+    const isUserNameValid = formValues.userName.trim().length > 1;
+    const isCaptionValid = formValues.caption.trim().length > 1;
 
     setFormValidity({
       nameValid: isUserNameValid,

@@ -28,8 +28,8 @@ function ImagePopup ({card, onClose, stopProp}) {
           </button>
           <img
             className="popup__image"
-            src={card ? card.link : ''}
-            alt={card ? card.name : ''}
+            src={card?.link}
+            alt={card?.name}
           />
           <figcaption className="popup__caption">{card ? card.name : ''}</figcaption>
         </figure>

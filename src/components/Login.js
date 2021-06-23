@@ -1,12 +1,8 @@
 import React from 'react'
 import Form from './Form'
-import { useHistory } from 'react-router-dom';
-import * as auth from './auth'
 
 function Login (props) {
-  const {title, name, buttonText, logIn, openInfo, setInfoTooltipMessage} = props;
-
-  const history = useHistory();
+  const {title, name, buttonText, onLogIn} = props;
 
   const [formValues, setFormValues] = React.useState({
     email: '',
@@ -29,23 +25,10 @@ function Login (props) {
     if (!password || !email){
       return;
     }
-    auth.authorize(password, email)
-    .then((data) => {
-      localStorage.setItem('jwt', data.token);
-      setFormValues({
-        email: '',
-        password: ''
-      })
-      logIn(true);
-      history.push('/');
-    })
-    .catch( (err) => {
-      setInfoTooltipMessage(false)
-      openInfo()
-      console.log(err)
-    });
-
+    onLogIn(password, email);
   }
+
+  const {email, password} = formValues;
 
   return  (
     <div className="enter">
@@ -58,6 +41,7 @@ function Login (props) {
         type="login"
       >
         <input
+          value={email}
           type="url"
           name="email"
           placeholder="Email"
@@ -67,6 +51,7 @@ function Login (props) {
           required
         />
         <input
+          value={password}
           type="password"
           name="password"
           placeholder="Пароль"

@@ -1,13 +1,9 @@
 import React from 'react'
 import Form from './Form'
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import * as auth from './auth'
 
 function Register (props) {
-  const {title, name, buttonText, openInfo, setInfoTooltipMessage} = props;
-
-  const history = useHistory();
+  const {title, name, buttonText, onRegister} = props;
 
   const [formValues, setFormValues] = React.useState({
     password: '',
@@ -25,24 +21,10 @@ function Register (props) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const { password, email } = formValues;
-
-    auth.register(password, email)
-      .then((res) => {
-        console.log(res)
-        setFormValues({
-          password: '',
-          email: '',
-        })
-        setInfoTooltipMessage(true)
-        openInfo()
-        history.push('/sign-in')
-      })
-      .catch((err) => {
-        console.log(err)
-        setInfoTooltipMessage(false)
-        openInfo()
-      })
+    onRegister(password, email);
   }
+
+  const { password, email} = formValues;
 
   return  (
     <div className="enter">
@@ -55,6 +37,7 @@ function Register (props) {
         type="login"
       >
         <input
+          value={email}
           type="url"
           name="email"
           placeholder="Email"
@@ -64,6 +47,7 @@ function Register (props) {
           required
         />
         <input
+          alue={password}
           type="password"
           name="password"
           placeholder="Пароль"

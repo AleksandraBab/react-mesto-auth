@@ -15,7 +15,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import React  from 'react'
 import {api} from '../utils/api'
 import CurrentUserContext from '../contexts/CurrentUserContext'
-import * as auth from './auth'
+import * as auth from '../utils/auth'
 
 
 function App() {
@@ -51,10 +51,6 @@ function App() {
 
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true)
-  }
-
-  const openInfo = () => {
-    setIsInfoTooltipOpen(true)
   }
 
   const closeAllPopups = () => {
@@ -117,7 +113,6 @@ function App() {
           if (res.data.email !== userEmail) {
             setUserEmail(res.data.email);
           }
-            console.log(res)
             setLogedIn(true)
             history.push('/');
         })
@@ -125,6 +120,35 @@ function App() {
           console.log(err);
         });
     }
+  };
+
+  const handleRegistration = (password, email) => {
+    auth.register(password, email)
+      .then((res) => {
+        console.log(res)
+        setInfoTooltipMessage(true)
+        setIsInfoTooltipOpen(true)
+        history.push('/sign-in')
+      })
+      .catch((err) => {
+        console.log(err)
+        setInfoTooltipMessage(false)
+        setIsInfoTooltipOpen(true)
+      })
+  };
+
+  const handleLogIn = (password, email) => {
+    auth.authorize(password, email)
+      .then((data) => {
+        localStorage.setItem('jwt', data.token);
+        setLogedIn(true);
+        history.push('/');
+      })
+      .catch( (err) => {
+        setInfoTooltipMessage(false)
+        setIsInfoTooltipOpen(true)
+        console.log(err)
+      });
   }
 
 
@@ -259,9 +283,7 @@ function App() {
             title='Вход'
             buttonText='Войти'
             name='login'
-            logIn={isLogIn}
-            openInfo={openInfo}
-            setInfoTooltipMessage={setInfoTooltipMessage}
+            onLogIn={handleLogIn}
           />
           </Route>
           <Route path="/sign-up">
@@ -269,8 +291,7 @@ function App() {
               title='Регистрация'
               buttonText='Зарегистрироваться'
               name='register'
-              openInfo={openInfo}
-              setInfoTooltipMessage={setInfoTooltipMessage}
+              onRegister={handleRegistration}
             />
          </Route>
 

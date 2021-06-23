@@ -23,7 +23,6 @@ function PopupWithForm (props) {
         name={name}
         onSubmit={onSubmit}
         buttonText={buttonText}
-        onSubmit={onSubmit}
         valid={valid}
         children={children}
       />
