@@ -33,7 +33,7 @@ export default function AddPlacePopup (props) {
 
 
   React.useEffect(() => {
-    const isNameValid = formValues.placeNamelength > 1;
+    const isNameValid = formValues.placeName.trim().length > 1;
     const isLinkValid = formValues.link.trim().length > 1;
 
     setFormValidity({

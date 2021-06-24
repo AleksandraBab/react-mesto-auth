@@ -37,6 +37,7 @@ function App() {
   const [editButtonText, setEditButtonText] = React.useState('Сохранить')
   const [avatarButtonText, setAvatarButtonText] = React.useState('Сохранить')
   const [placeButtonText, setPlaceButtonText] = React.useState('Создать')
+  
 
   const [currentUser, setCurrentUser] = React.useState(React.useContext(CurrentUserContext))
 

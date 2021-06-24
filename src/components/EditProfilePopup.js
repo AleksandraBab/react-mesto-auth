@@ -3,7 +3,7 @@ import CurrentUserContext from '../contexts/CurrentUserContext'
 import PopupWithForm from './PopupWithForm'
 
 export default function EditProfilePopup (props) {
-  const {onUpdateUser, isOpen, onClose, stopProp, buttonText} = props;
+  const {onUpdateUser, buttonText, isOpen, onClose, stopProp} = props;
 
   const currentUser = React.useContext(CurrentUserContext);
 
